@@ -15,6 +15,18 @@ export default function Weather({ temp }) {
 
 Weather.PropTypes = {
   temp: PropTypes.number.isRequired, //temp가 숫자이기 때문에 number를 쓴거 같음
+  condition: PropTypes.oneOf([
+    "Thunderstorm",
+    "Drizzle",
+    "Rain",
+    "Snow",
+    "Atmosphere",
+    "Clear",
+    "Clouds",
+    "Dust",
+    "Haze",
+    "Mist",
+  ]).isRequired,
 };
 
 const styles = StyleSheet.create({
