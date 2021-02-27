@@ -1,5 +1,6 @@
 import React from "react";
 import Loading from "./Loading";
+import Weather from "./Weather";
 import * as Location from "expo-location";
 import { Alert } from "react-native";
 import axios from "axios";
@@ -12,9 +13,11 @@ export default class extends React.Component {
   };
   getWeather = async (latitude, longitude) => {
     const { data } = await axios.get(
-      `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${API_KEY}`
+      `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${API_KEY}&units=metric`
+      //units=metric (섭씨 온도를 가져옴)
     );
-    console.log(data);
+    //console.log(data);
+    this.setState({ isLoading: false, temp: data.main.temp });
   };
   getLocation = async () => {
     try {
@@ -32,7 +35,7 @@ export default class extends React.Component {
     this.getLocation();
   }
   render() {
-    const { isLoading } = this.state;
-    return isLoading ? <Loading /> : null;
+    const { isLoading, temp } = this.state;
+    return isLoading ? <Loading /> : <Weather temp={Math.round(temp)} />;
   }
 }
