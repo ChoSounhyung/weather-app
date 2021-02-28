@@ -34,6 +34,8 @@ const weatherOptions = {
   Clouds: {
     iconName: "weather-cloudy",
     gradient: ["#D7D2CC", "#304352"],
+    title: "Clouds",
+    subtitle: "I know, fucking boring",
   },
   Mist: {
     iconName: "weather-hail",
@@ -46,6 +48,8 @@ const weatherOptions = {
   Haze: {
     iconName: "weather-fog",
     gradient: ["#4DA0B0", "#D39D38"],
+    title: "Haze",
+    subtitle: "Just don't go outside.",
   },
 };
 
@@ -63,9 +67,14 @@ export default function Weather({ temp, condition }) {
           name={weatherOptions[condition].iconName}
           color="white"
         />
-        <Text style={styles.temp}>{temp}</Text>
+        <Text style={styles.temp}>{temp}º</Text>
       </View>
-      <View style={styles.halfContainer}></View>
+      <View style={{ ...styles.halfContainer, ...styles.textContainer }}>
+        <Text style={styles.title}>{weatherOptions[condition].title}</Text>
+        <Text style={styles.subtitle}>
+          {weatherOptions[condition].subtitle}
+        </Text>
+      </View>
     </LinearGradient>
   );
 }
@@ -80,9 +89,9 @@ Weather.PropTypes = {
     "Atmosphere",
     "Clear",
     "Clouds",
+    "Mist",
     "Dust",
     "Haze",
-    "Mist",
   ]).isRequired,
 };
 
@@ -100,5 +109,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  title: {
+    color: "white",
+    fontSize: 44,
+    fontWeight: "300",
+    marginBottom: 10,
+  },
+  subtitle: {
+    color: "white",
+    fontSize: 24,
+    fontWeight: "600",
+  },
+  textContainer: {
+    paddingHorizontal: 20,
+    alignItems: "flex-start",
   },
 });
