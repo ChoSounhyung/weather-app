@@ -85,6 +85,7 @@ export default function Weather({ temp, condition }) {
         />
         <Text style={styles.temp}>{temp}º</Text>
       </View>
+      {/* Spread(...) 연산자 사용 */}
       <View style={{ ...styles.halfContainer, ...styles.textContainer }}>
         <Text style={styles.title}>{weatherOptions[condition].title}</Text>
         <Text style={styles.subtitle}>
@@ -98,6 +99,7 @@ export default function Weather({ temp, condition }) {
 Weather.PropTypes = {
   temp: PropTypes.number.isRequired, //temp가 숫자이기 때문에 number를 쓴거 같음
   condition: PropTypes.oneOf([
+    //날씨 이름에 따라 화면을 다르게 하기위해 이름을 일일이 가져옴
     "Thunderstorm",
     "Drizzle",
     "Rain",
